@@ -7,8 +7,25 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		//$this->load->view('welcome_message');
-		$this->load->view('bubble');
+		$this->load->view('index');
 	}
+	
+	
+	public function show($view, $data)
+	{
+		if(!isset($view))
+			$this->load->view('error/html/error_404');
+		else
+			$this->load->view($view, $data);
+	}
+	
+	public function show_bubble($ID,$isAll)
+	{
+		$data['ID'] = $ID;
+		$data['isAll'] = $isAll;
+		$this->show("bubble", $data);
+	}
+	
 	
 	public function getCookie()
 	{
@@ -23,6 +40,7 @@ class Welcome extends CI_Controller {
 	//	echo $results[1][0];
 		return $results[1][0];
 	}
+	
 	
 	public function getScore($id, $all)
 	{

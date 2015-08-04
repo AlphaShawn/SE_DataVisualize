@@ -17,6 +17,8 @@
 <body>
 	<script>
 
+	var base_url = "/alpha/index.php";
+	
 	var diameter = 960,
 		format = d3.format(",d"),
 		color = d3.scale.category20c();
@@ -31,7 +33,11 @@
 		.attr("height", diameter)
 		.attr("class", "bubble");
 	
-	d3.json("getScore/5140379058/1", function(error, root) {
+	var ID = <?php echo $ID ?>;
+	var isAll = <?php echo $isAll ?>;
+	
+	//console.log(base_url+"/welcome/getScore/"+ID + "/" + isAll);
+	d3.json(base_url+"/welcome/getScore/"+ID + "/" + isAll, function(error, root) {
 		if (error) throw error;
 	
 		var scale = d3.scale.sqrt()
@@ -99,18 +105,6 @@
 	}
 
 	d3.select(self.frameElement).style("height", diameter + "px");
-	
-	</script>
-
-	<input id="ID" type="text">
-	<input id = "search" type = "button" value="click"/>
-	
-	<script>
-		$('#remove').on('click',function(){
-			$("svg").remove();
-			
-			
-		});
 	
 	</script>
 
