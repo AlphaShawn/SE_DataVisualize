@@ -42,7 +42,7 @@
 <body>
 	<script>
 	
-		var margin = {top: 20, right: 20, bottom: 30, left: 50},
+		var margin = {top: 20, right: 30, bottom: 30, left: 30},
 			width = window.innerWidth- margin.left - margin.right,
 			height = 530 - margin.top - margin.bottom;
 		
@@ -53,7 +53,7 @@
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		
 		
-		d3.csv('/alpha/data/12-1-se.csv', function(error, data){
+		d3.csv('/alpha/data/14-1-ee.csv', function(error, data){
 			
 			console.log(data);
 			

@@ -12,8 +12,8 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		//$this->load->view('welcome_message');
-		$this->load->view('bubble_index');
-		//$this->load->view('line_index');
+		//$this->load->view('bubble_index');
+		$this->load->view('line_index');
 	}
 	
 	public function test()
