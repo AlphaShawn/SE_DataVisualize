@@ -3,11 +3,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('Welcome_model');
+	}
 	
 	public function index()
 	{
 		//$this->load->view('welcome_message');
 		$this->load->view('index');
+	}
+	
+	public function get_origin_quality() 
+	{
+		$a = file('xuehao.txt');
+		foreach($a as $line=>$content)
+		{
+			$content = trim($content);
+			$data = $this->Welcome_model->getScore($content, 0);
+			
+			$res = 0;
+			$count = 0;
+			$num = 0;
+			
+			for($i=0 ; $i < count($data['unit']) ; $i++)
+			{
+				if($data['unit'][$i] == "0")
+					continue;
+				else
+				{
+					$num++;
+					$count  = $count + floatval($data['unit'][$i]);
+					$res = $res + floatval($data['unit'][$i]) * floatval($data['score'][$i]);
+				}
+			}
+			
+			if($count>=10)
+				$res = $res/$count*0.3;
+			else
+				$res = $res/10*0.3;
+			$res = floor(($res+0.005)*100)/100;  //四舍五入 保留小数点后2位
+			echo ' '.$res;
+			echo "<br/>";
+		}
 	}
 	
 	
@@ -19,6 +58,7 @@ class Welcome extends CI_Controller {
 			$this->load->view($view, $data);
 	}
 	
+	
 	public function show_bubble($ID,$isAll)
 	{
 		$data['ID'] = $ID;
@@ -27,74 +67,26 @@ class Welcome extends CI_Controller {
 	}
 	
 	
-	public function getCookie()
-	{
-		$url = 'http://z.seiee.com/index.php/History/change/year/2014/semester/1';
-		$ch = curl_init($url); //初始化
-		curl_setopt($ch,CURLOPT_HEADER,1); //将头文件的信息作为数据流输出
-		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1); //返回获取的输出文本流
-		curl_setopt($ch, CURLOPT_HEADER, 1);
-		$string = curl_exec($ch);
-		//echo $string;
-		preg_match_all('/Set-Cookie:(.*);/i', $string, $results);
-	//	echo $results[1][0];
-		return $results[1][0];
-	}
-	
-	
 	public function getScore($id, $all)
 	{
-		$cookie = $this->getCookie();
+		$cookie = $this->Welcome_model->get_cookie(2014,1);
 		
-		//echo $cookie;
-		
-		$ch = curl_init();
-		$url = "http://z.seiee.com/index.php/Score/search?sid=".$id;
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_COOKIE, $cookie);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$subject = curl_exec($ch);
+		$data = $this->Welcome_model->get_score($cookie, $id, $all);
 		
 		
-		$pattern;
-		if($all == true)
-			$pattern = '/<td (class="opt-score")*>(.*)<\/td>\s*<td>(.*)<\/td>\s*<td>(.*)<\/td>\s*<td>(.*)<\/td>/';
-		else
-			$pattern = '/<td class="opt-score">(.*)<\/td>\s*<td>(.*)<\/td>\s*<td>(.*)<\/td>\s*<td>(.*)<\/td>/';
-		
-		$match = array();
-		preg_match_all($pattern, $subject, $match);
-		
-		curl_close($ch);
-		
-		if($all == true)
-		{
-			$data['unit'] = $match[4];
-			$data['score'] = $match[5];
-		}
-		else
-		{
-			$data['unit'] = $match[3];
-			$data['score'] = $match[4];
-		}
-		
+		//将获得的数据打包成需要的格式 然后json_encode传递到前端
 		$res = array();
 		for($i=0;$i<count($data['unit']);$i++)
 		{
-			// if($data['unit'][$i] == 0)
-			// {
-				// $tmp = array("name"=>$data['unit'][$i], "size"=>$data['score'][$i]);
-			// }
-			// else
-			if($data['unit'][$i] == 0)
+			if($data['unit'][$i] == 0)				//硬加分素拓
 			{
 				$data['unit'][$i] = "硬加分".$data['score'][$i];
 				$data['score'][$i] = 100;
 			}
 			$tmp = array( 	
 							"name"=>$data['unit'][$i], 
-							"size"=>intval($data['score'][$i],10) 
+							"score"=>floatval($data['score'][$i]),
+							"size"=>floatval($data['score'][$i]) 
 						);
 			$res[$i] = $tmp;
 		}

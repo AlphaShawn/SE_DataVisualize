@@ -14,34 +14,38 @@
 		}
 	
 		#frame {
-			width:1030px;
-			height: 960;
+			width:100%px;
+			height: 500px;
 			margin: 0 auto;
 			
 		}
 		
+		#content {
+			width:960px;
+			margin: 0 auto;
+		}
 		
 	</style>
 </head>
 
 <body>
-	<div id="frame">
-		<iframe marginheight="0" marginwidth="0" scrolling="no" style="height:960; width:960">
+	<div id = "content">
+		<div id="frame">
+			<iframe marginheight="0" marginwidth="0" scrolling="no" style="height:500; width:100%">
+			
+			
+			</iframe>
+		</div>
 		
-		
-		</iframe>
-	</div>
-	
-	<input id="ID" type="text" /><br/>
-	<input id = "search" type = "button" value="click"/>
-	
+		<br/>
+		<input id="ID" type="text" /><br/>
+		<input id = "search" type = "button" value="click"/>
+	</content>
 	<script>
 		$('#search').on('click',function(){
-			
 			var ID = $('#ID').val();
-			console.log(ID);
+			//console.log(ID);
 			$('iframe').attr('src', '/alpha/index.php/welcome/show_bubble/'+ID+"/1");
-			
 		});
 	
 	</script>
