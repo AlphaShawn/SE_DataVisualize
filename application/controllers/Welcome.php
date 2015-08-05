@@ -12,7 +12,14 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		//$this->load->view('welcome_message');
-		$this->load->view('index');
+		$this->load->view('bubble_index');
+		//$this->load->view('line_index');
+	}
+	
+	public function test()
+	{
+		$cookie = $this->Welcome_model->get_cookie(2014,1);
+		$this->Welcome_model->get_score($cookie, 5140379066,1);
 	}
 	
 	public function get_origin_quality() 
@@ -61,18 +68,49 @@ class Welcome extends CI_Controller {
 	
 	public function show_bubble($ID,$isAll)
 	{
+		if(!isset($ID) || !isset($isAll))
+			return;
 		$data['ID'] = $ID;
 		$data['isAll'] = $isAll;
 		$this->show("bubble", $data);
 	}
 	
+	public function show_line()
+	{
+		$data = array();
+		$this->show("line", $data);
+	}
+	
+	
+	public function check_id($ID) 
+	{
+		if(!is_numeric($ID))
+		{
+			echo "false";
+			return false;
+		}
+		
+		if($this->Welcome_model->check_id(2014, 1, $ID))
+		{
+			echo "true";
+			return true;
+		}
+		else
+		{
+			echo "false2";
+			return false;
+		}
+	}
 	
 	public function getScore($id, $all)
 	{
+		if(!isset($id))
+			return;
+		
 		$cookie = $this->Welcome_model->get_cookie(2014,1);
 		
 		$data = $this->Welcome_model->get_score($cookie, $id, $all);
-		
+	
 		
 		//将获得的数据打包成需要的格式 然后json_encode传递到前端
 		$res = array();
@@ -91,7 +129,10 @@ class Welcome extends CI_Controller {
 			$res[$i] = $tmp;
 		}
 		
-		$dat = array("name"=>"father", "children"=>$res);
+		$dat = array(
+					"name"=>"father", 
+					"children"=>$res
+				);
 		
 		header('Content-type:text/json');
 		echo json_encode($dat);

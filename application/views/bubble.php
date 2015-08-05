@@ -19,15 +19,18 @@
 
 	var base_url = "/alpha/index.php";
 	
-	
-	var ID = <?php echo $ID ?>;
-	var isAll = <?php echo $isAll ?>;
+	var ID = "<?php echo $ID ?>";
+	var isAll = "<?php echo $isAll ?>";
 
 	//console.log(base_url+"/welcome/getScore/"+ID + "/" + isAll);
 	d3.json(base_url+"/welcome/getScore/"+ ID + "/" + isAll, function(error, root) {
-		//console.log(root);
+		console.log(root);
 		if (error) throw error;
-	
+		if(root.children.length == 0)
+		{
+			d3.select('body').append('h').text('no result');
+			return;
+		}
 		
 	
 		var width = 40*root.children.length>780?780:40*root.children.length,

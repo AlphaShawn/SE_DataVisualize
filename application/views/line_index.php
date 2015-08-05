@@ -14,16 +14,34 @@
 		}
 	
 		#frame {
-			width:100%px;
-			height: 500px;
-			margin: 0 auto;
+			width:100%;
+			height: 560px;
+			margin: 10px 0 20px 0 ;
 			
 		}
 		
 		#content {
 			width:960px;
-			margin: 0 auto;
 		}
+		
+		#frame-info {
+			width:28%;
+			height:100%;
+			float:right;
+			font-family: "sans-serif";
+		}
+		
+		#ok-info {
+			background:url("/alpha/image/ok.png");
+			height:14px;
+			width:14px;
+		}
+		
+		#invalid-info {
+			background:url("/alpha/image/invalid.png");
+			padding-left:14px;
+		}
+		
 		
 	</style>
 </head>
@@ -31,23 +49,22 @@
 <body>
 	<div id = "content">
 		<div id="frame">
-			<iframe marginheight="0" marginwidth="0" scrolling="no" style="height:500; width:100%">
+			<iframe marginheight="0" marginwidth="0" scrolling="no" style="height:100%; width:100%">
 			
 			
 			</iframe>
 		</div>
 		
-		<br/>
-		<input id="ID" type="text" /><br/>
-		<input id = "search" type = "button" value="click"/>
+		<input id = "search" type = "button" value="show"/>
 	</content>
 	<script>
-		$('#search').on('click',function(){
-			var ID = $('#ID').val();
-			//console.log(ID);
-			$('iframe').attr('src', '/alpha/index.php/welcome/show_bubble/'+ID+"/1");
-		});
 	
+		$('#search').on('click',function(){
+			
+			$('iframe').attr('src', '/alpha/index.php/welcome/show_line');
+			
+		});
+		
 	</script>
 </body>
 

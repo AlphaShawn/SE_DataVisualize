@@ -7,6 +7,23 @@ class Welcome_model extends CI_Model {
                 parent::__construct();
         }
 		
+		public function check_id($year, $semester, $id)
+		{
+			$cookie = $this->get_cookie($year, $semester);
+			
+			$ch = curl_init();
+			$url = "http://z.seiee.com/index.php/Score/search?sid=".$id;
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			$subject = curl_exec($ch);
+			$pattern = "/span10/";
+			
+			return !preg_match($pattern, $subject);
+			
+		}
+		
 		public function get_cookie($year, $semester)
 		{
 			if(!isset($year) || !isset($semester))
@@ -23,6 +40,7 @@ class Welcome_model extends CI_Model {
 			return $results[1][0];
 		}
 		
+		
 		public function get_score($cookie, $id, $isAll)
 		{
 			$ch = curl_init();
@@ -32,6 +50,7 @@ class Welcome_model extends CI_Model {
 			curl_setopt($ch, CURLOPT_HEADER, 0);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			$subject = curl_exec($ch);
+			curl_close($ch);
 			
 			$pattern;
 			if($isAll == true)
@@ -41,9 +60,7 @@ class Welcome_model extends CI_Model {
 			
 			$match = array();
 			preg_match_all($pattern, $subject, $match);
-			
-			curl_close($ch);
-			
+						
 			if($isAll == true)
 			{
 				$data['unit'] = $match[4];
@@ -55,8 +72,14 @@ class Welcome_model extends CI_Model {
 				$data['score'] = $match[4];
 			}
 			
-			//var_dump($data);
+			$pattern = "/<span class=\"badge badge-info\">(.*)<\/span><\/td>/";
+			$match = array();
+			preg_match_all($pattern, $subject, $match);
 			
+			$data['total_score'] = $match[1][0];
+			$data['rank'] = $match[1][1];
+			
+			//var_dump($match);
 			return $data;
 		}
 		
