@@ -75,9 +75,9 @@ class Welcome extends CI_Controller {
 		$this->show("bubble", $data);
 	}
 	
-	public function show_line()
+	public function show_line($mess)
 	{
-		$data = array();
+		$data['url'] = $mess;
 		$this->show("line", $data);
 	}
 	

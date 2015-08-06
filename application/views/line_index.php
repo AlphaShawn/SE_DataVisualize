@@ -55,13 +55,23 @@
 			</iframe>
 		</div>
 		
+		<select id = "select-data">
+			<option value="14-1-14-se.csv" selected="selected">14-15学年14级软件</option>
+			<option value="14-1-14-seiee.csv">14-15学年14级电子信息类</option>
+			<option value="14-1-14-ic.csv">14-15学年14级微电子</option>
+			<option value="14-1-14-is.csv">14-15学年14级信安</option>
+			<option value="14-1-14-seiees.csv">14-15学年14级电子信息科学类</option>
+			<option value="14-1-14-eec.csv">14-15学年14级工科实验班</option>
+		
+		</select>
+		
 		<input id = "search" type = "button" value="show"/>
 	</content>
 	<script>
 	
 		$('#search').on('click',function(){
-			
-			$('iframe').attr('src', '/alpha/index.php/welcome/show_line');
+			var mess = $('#select-data').find('option:selected').val();
+			$('iframe').attr('src', '/alpha/index.php/welcome/show_line/'+mess);
 			
 		});
 		
