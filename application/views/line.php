@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -220,7 +223,8 @@
 						.attr('y1',0)
 						.attr('x2',0)
 						.attr('y2',height);
-			
+						
+			$('#total-students').text(" " + data.length);
 		});
 	</script>
 	
@@ -228,22 +232,20 @@
 		<div style="float:left">
 			<input type="checkbox" id="score-control" checked = "true"><span style="color:steelblue">学积分</span></input>
 			<input type="checkbox" id="quality-control" checked = "true">素拓分</input>
-			<input type="checkbox" id="score-average-control" checked = "true">学积分平均值</input>
+			<input type="checkbox" id="score-average-control" checked = "true"><span style="color:steelblue">学积分平均值</span></input>
 			<input type="checkbox" id="quality-average-control" checked = "true">素拓分平均值</input>
 		</div>
 		<div id = "info">
 			<td>
+				<li>总人数:<span id="total-students"></span></li>
 				<li>学积分低于平均分人数：<span id="score-lower-average">0</span></li>
 				<li>素拓分低于平均分人数：<span id="quality-lower-average">0</span></li>
 			</td>
-		
-		
 		</div>
-		
-		
 	</div>
 	
 	<script>
+			
 		$('#score-control').on('click',function(){
 			
 		//	console.log(dat);
@@ -317,7 +319,8 @@
 				d3.select('#vertival-group')
 					.attr('transform', "translate("+mouseX+","+0+")")
 					.select('text')
-					.text(num);
+					.text(num)
+					.attr('transform', "translate(-15,"+mouseY+")");
 				
 				var scoreLower=0, qualityLower=0;
 				for(var i=0;i<num;i++)

@@ -1,3 +1,7 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Score | Visualize</title>
@@ -14,7 +18,7 @@
 		}
 	
 		#frame {
-			width:100%px;
+			width:100%;
 			height: 500px;
 			margin: 0 auto;
 			
@@ -22,6 +26,7 @@
 		
 		#content {
 			width:960px;
+			height:500px;
 			margin: 0 auto;
 		}
 		
@@ -50,7 +55,7 @@
 <body>
 	<div id = "content">
 		<div id="frame">
-			<iframe marginheight="0" marginwidth="0" scrolling="no" style="height:500; width:70%">
+			<iframe marginheight="0" marginwidth="0" scrolling="no" style="float:left;height:inherit; width:70%">
 			
 			
 			</iframe>

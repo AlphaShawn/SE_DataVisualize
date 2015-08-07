@@ -13,51 +13,44 @@ class Welcome extends CI_Controller {
 	{
 		//$this->load->view('welcome_message');
 		//$this->load->view('bubble_index');
-		$this->load->view('line_index');
+		$this->load->view('index');
 	}
 	
 	public function test()
 	{
 		$cookie = $this->Welcome_model->get_cookie(2014,1);
-		$this->Welcome_model->get_score($cookie, 5140379066,1);
+		$data = $this->Welcome_model->get_score($cookie, 5140379066,1);
+		//var_dump($data);
 	}
 	
 	public function get_origin_quality() 
 	{
-		$a = file('xuehao.txt');
+		$filename = "14-1-14-eec";
+		//$a = file($filename.'.txt');
+		$a = file("xuehao.txt");
+		
+		
+		$str = "quality,num_of_activity\n";
 		foreach($a as $line=>$content)
 		{
 			$content = trim($content);
-			$data = $this->Welcome_model->getScore($content, 0);
+			$cookie = $this->Welcome_model->get_cookie(2014,1);
+			$data = $this->Welcome_model->get_score($cookie, $content, 1);
 			
 			$res = 0;
 			$count = 0;
 			$num = 0;
+			$str = $str.$data['total_score'].','.count($data['unit'])."\n";
 			
-			for($i=0 ; $i < count($data['unit']) ; $i++)
-			{
-				if($data['unit'][$i] == "0")
-					continue;
-				else
-				{
-					$num++;
-					$count  = $count + floatval($data['unit'][$i]);
-					$res = $res + floatval($data['unit'][$i]) * floatval($data['score'][$i]);
-				}
-			}
-			
-			if($count>=10)
-				$res = $res/$count*0.3;
-			else
-				$res = $res/10*0.3;
-			$res = floor(($res+0.005)*100)/100;  //四舍五入 保留小数点后2位
-			echo ' '.$res;
-			echo "<br/>";
 		}
+		header("Content-type:text/csv"); 
+		header("Content-Disposition:attachment;filename=".$filename.".csv");
+		echo $str;
+		
 	}
 	
 	
-	public function show($view, $data)
+	public function show($view, $data=array())
 	{
 		if(!isset($view))
 			$this->load->view('error/html/error_404');
