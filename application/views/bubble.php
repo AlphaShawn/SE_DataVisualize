@@ -14,6 +14,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  font: 10px sans-serif;
 	}
 
+	.info-text{
+		
+		font-size: 14px;
+		
+	}
+	
 	</style>
 </head>
 
@@ -27,6 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	//console.log(base_url+"/welcome/getScore/"+ID + "/" + isAll);
 	d3.json(base_url+"/welcome/getScore/"+ ID + "/" + isAll, function(error, root) {
+	
 		console.log(root);
 		if (error) throw error;
 		if(root.children.length == 0)
@@ -99,7 +106,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			.duration(1000)
 			.delay(function(d,i){ return i*100;})
 			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-			
+		
+		var info = svg.append('g')
+						.attr('transform', "translate(10,20)");
+		
+		var padding = 30;
+		info.append('text')
+			.attr('class',"info-text")
+			.text("素拓总分："+root.total_score);
+		info.append('text')
+			.attr('class',"info-text")
+			.attr('transform', "translate(0,"+padding+")")
+			.text("硬加分："+root.plus);
+		info.append('text')
+			.attr('class',"info-text")
+			.attr('transform', "translate(0,"+padding*2+")")
+			.text("排名："+root.rank);
+		info.append('text')
+			.attr('class',"info-text")
+			.attr('transform', "translate(0,"+padding*3+")")
+			.text("参与活动数："+root.num_activity);
+		
 		
 		d3.select(self.frameElement).style("height", height + "px");
 	});

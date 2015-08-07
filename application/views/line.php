@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html>
 <head>
-	<title>test</title>
+	<title>Score | Visualize</title>
 	<meta http-equiv="Content-type" content="text/html"; charset='utf-8'></meta>
 	<script src="/alpha/js/d3.min.js" charset='utf-8'></script>
 	<script src = "/alpha/js/jquery-1.11.3.js" charset = 'utf-8'></script>
@@ -16,7 +16,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		.axis path,
 		.axis line {
+		  fill: none;
 		  stroke: #000;
+		  shape-rendering: crispEdges;
 		}
 
 		#line-score {
@@ -97,7 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				d.score = parseFloat(d.score);
 				d.quality = parseFloat(d.quality);
 				d.finalscore = parseFloat(d.finalscore);
-			})
+			});
 			
 			//x轴坐标映射函数
 			x = d3.scale.linear()
@@ -151,17 +153,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			svg.append("g")
 			   .attr("class", "x axis")
 			   .attr("transform", "translate(0," + height + ")")
-			   .call(xAxis);
+			   .call(xAxis)
+			   .append('text')
+			   .attr('transform',"translate("+((width-margin.right-margin.left)/2-10)+"-10)")
+			   .text('综合评测排名');
 			   
 			svg.append("g")
 				.attr("class", "y axis")
-				.call(yAxis1);
+				.call(yAxis1)	
+				.append('text')
+				.text('学积分');
 			
 			svg.append("g")
 				.attr("class", "y axis")
 				.attr("transform", "translate("+(width)+",0)")
-				.call(yAxis2);
-			
+				.call(yAxis2)
+				.append('text')
+				.attr('transform',"translate(-50,0)")
+				.text('素拓成绩');
+				
 			svg.append("path")
 			   .datum(data)
 			   .attr("id", "line-score")

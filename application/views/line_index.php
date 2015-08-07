@@ -82,27 +82,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<option value="14-1-13-ic.csv">14-15学年13级微电子</option>
 			<option value="14-1-13-seiees.csv">14-15学年13级电子信息科学类</option>
 		</select>
-		
+		<form style="display:inline">
+			<input name="vis" type="radio" value="scatter">散点图
+			<input name="vis" type="radio" value="lineChart" checked="checked">折线图
+		</form>
 		<input id = "search" type = "button" value="show"/>
 	</div>
 	<script>
 	
 		$('#search').on('click',function(){
 			var mess = $('#select-data').find('option:selected').val();
-			$('iframe').attr('src', '/alpha/index.php/welcome/show_line/'+mess);
+			var val= $('input:radio[name="vis"]:checked').val();
+			if(val == "lineChart")
+				$('iframe').attr('src', '/alpha/index.php/welcome/show_line/'+mess);
+			else if(val == "scatter")
+				$('iframe').attr('src', '/alpha/index.php/welcome/show_scatter/'+mess);
 			
 		});
 		
 	</script>
 	
 	<div id="analyse-content">
-		<hr>
-		<h1>做图说明</h1>
-		<ul>
-			<li>横坐标按综测排名从小到大</li>
-			<li>左纵坐标为学积分成绩</li>
-			<li>右纵坐标为素拓成绩</li>
-		</ul>
 		<hr>
 		<h1>Analyse</h1>
 			<p>随着综测排名下降，学积分总体呈下降趋势，但存在几处较大波动</p>

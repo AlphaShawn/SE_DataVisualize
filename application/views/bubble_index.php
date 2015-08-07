@@ -55,17 +55,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 	<div id = "content">
 		<div id="frame">
-			<iframe marginheight="0" marginwidth="0" scrolling="no" style="float:left;height:inherit; width:70%">
-			
-			
+			<iframe marginheight="0" marginwidth="0" scrolling="no" style="float:left;height:inherit; width:100%">
 			</iframe>
-			<div id = "frame-info">
-				<p>素拓总分： <span id = "total-score"></span></p>
-				<p>硬加分：</p>
-				<p>排名：</p>
-				<p>参与活动数：</p>
-				
-			</div>
 		</div>
 		
 		<br/>
@@ -88,12 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				alert("empty");
 				return;
 			}
-			$('iframe').attr('src', '/alpha/index.php/welcome/show_bubble/'+ID+"/1");
-			
-			$.ajax({ url: "/alpha/index.php/welcome/test", success: function(d){
-				console.log(d);
-				$('#total-score').html(d);
-			}});
+			$('iframe').attr('src', '/alpha/index.php/welcome/show_bubble/'+ID+"/1");			
 		});
 		
 		

@@ -74,6 +74,11 @@ class Welcome extends CI_Controller {
 		$this->show("line", $data);
 	}
 	
+	public function show_scatter($mess)
+	{
+		$data['url'] = $mess;
+		$this->show("scatter", $data);
+	}
 	
 	public function check_id($ID) 
 	{
@@ -95,6 +100,26 @@ class Welcome extends CI_Controller {
 		}
 	}
 	
+	public function get_basic_info($id)
+	{
+		if(!isset($id))
+			return;
+		$cookie = $this->Welcome_model->get_cookie(2014,1);
+		$data = $this->Welcome_model->get_score($cookie, $id, 1);
+		
+		$plus = 0;
+		for($i = 0;$i<count($data['unit']);$i++)
+		{
+			if($data['unit'][$i] == 0)
+				$plus += $data['score'][$i];
+		}
+		
+		$data['plus'] = $plus;
+		$data['num_activity'] = count($data['unit']);
+		header('Content-type:text/json');
+		echo json_encode($data);
+	}
+	
 	public function getScore($id, $all)
 	{
 		if(!isset($id))
@@ -103,7 +128,13 @@ class Welcome extends CI_Controller {
 		$cookie = $this->Welcome_model->get_cookie(2014,1);
 		
 		$data = $this->Welcome_model->get_score($cookie, $id, $all);
-	
+		
+		$plus = 0;//统计硬加分
+		for($i = 0;$i<count($data['unit']);$i++)
+		{
+			if($data['unit'][$i] == 0)
+				$plus += $data['score'][$i];
+		}
 		
 		//将获得的数据打包成需要的格式 然后json_encode传递到前端
 		$res = array();
@@ -124,7 +155,11 @@ class Welcome extends CI_Controller {
 		
 		$dat = array(
 					"name"=>"father", 
-					"children"=>$res
+					"children"=>$res,
+					"plus"=>$plus,
+					"num_activity"=>count($data['unit']),
+					"total_score"=>$data['total_score'],
+					"rank" =>$data['rank']
 				);
 		
 		header('Content-type:text/json');
