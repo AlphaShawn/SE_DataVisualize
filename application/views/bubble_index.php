@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset = "utf-8"/>
 	<script src = "/alpha/js/jquery-1.11.3.js" charset = 'utf-8'></script>
 	<script src = "/alpha/js/d3.min.js"></script> 
+	<link rel="stylesheet" href="/alpha/css/bootstrap.css" type="text/css"/>
 	<style>
 		body { 
 			font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -17,11 +18,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			width: 960px;
 		}
 	
-		#frame {
-			width:100%;
-			height: 500px;
-			margin: 0 auto;
-			
+		#frame
+		{
+			height:540px;
 		}
 		
 		#content {
@@ -53,54 +52,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 
 <body>
+
 	<div id = "content">
-		<div id="frame">
-			<iframe marginheight="0" marginwidth="0" scrolling="no" style="float:left;height:inherit; width:100%">
-			</iframe>
+
+		<div id="frame" class="embed-responsive embed-responsive-16by9">
+			<iframe class="embed-responsive-item" src="/alpha/index.php/welcome/show/bubble_prompt"></iframe>
 		</div>
 		
-		<br/>
 		<div>
-			<input id="ID" type="text" />
-			<img id = "notify" ></img>
+			<div class="col-lg-4" style="margin: 0 auto;float:none">
+				<div class="input-group">
+					<input type="text" class="form-control" id="ID" placeholder="enter student ID..."/>
+					<span class="input-group-btn">
+						<button class="btn btn-default" id = "search" type="button">Show</button>
+					</span>
+				</div><!-- /input-group -->
+			</div><!-- /.col-lg-4 -->
+			<div class = "clearfix"></div>
 		</div>
-		
-		
-		<input id = "search" type = "button" value="click"/>
-	</content>
+	</div>
+	
 	<script>
-	
-	
 		$('#search').on('click',function(){
 			var ID = $('#ID').val();
 			ID = $.trim(ID);
-			if(ID == "")
+			if(ID=="")
 			{
-				alert("empty");
+				$('iframe').attr('src', '/alpha/index.php/welcome/show/wrong_page');
 				return;
 			}
-			$('iframe').attr('src', '/alpha/index.php/welcome/show_bubble/'+ID+"/1");			
+			$.ajax({url:'/alpha/index.php/welcome/check_id/'+ID, 
+					success:function(d){
+						if(d==false)
+							$('iframe').attr('src', '/alpha/index.php/welcome/show/wrong_page');
+						else
+							$('iframe').attr('src', '/alpha/index.php/welcome/show_bubble/'+ID+"/1");
+					}
+			})
 		});
 		
-		
-		$('#ID').keyup(function(){
-			var ID = $('#ID').val();
-			ID = $.trim(ID);
-			if(ID == "")
-				$('#notify').attr('src', '/alpha/image/invalid.png');
-			else
-			{
-				$.ajax({ url: "/alpha/index.php/welcome/check_id/"+ID, success: function(d){
-					if(d == "true")
-						$('#notify').attr('src', '/alpha/image/ok.png');
-					else
-						$('#notify').attr('src', '/alpha/image/invalid.png');
-				}});
-			}
-		})
-		
-		
 	</script>
+	
 </body>
 
 

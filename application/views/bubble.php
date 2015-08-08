@@ -9,15 +9,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="/alpha/js/d3.min.js"></script>
 	<script src = "/alpha/js/jquery-1.11.3.js" charset = 'utf-8'></script>
 	<style>
-
+	html {
+	  font-family: sans-serif;
+	  -webkit-text-size-adjust: 100%;
+		  -ms-text-size-adjust: 100%;
+	}
+	
 	text {
-	  font: 10px sans-serif;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1.1;
+		color: inherit;
 	}
 
 	.info-text{
-		
 		font-size: 14px;
-		
 	}
 	
 	</style>
@@ -46,8 +53,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		var width = 40*root.children.length>780?780:40*root.children.length,
 			height = 500;
 			//height = 15*root.children.length>560?560:20*root.children.length,
-			format = d3.format(",d"),
-			color = d3.scale.category20c();
+			//format = d3.format(",d");
+			//color = d3.scale.category20c();
+			
+
 	
 		var bubble = d3.layout.pack()
 			.sort(null)
@@ -56,10 +65,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		var svg = d3.select("body")
 			.append("div")
-			.attr("style","width:"+width+"px;height:"+height+"px;margin:0 auto")
+			.attr("style","width:"+width+"px;height:"+(height-20)+"px;margin:0 auto")
 			.append("svg")
 			.attr("width", width)
-			.attr("height", height)
+			.attr("height", height-20)
 			.attr("class", "bubble");
 			
 		
@@ -83,6 +92,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					  .attr("class", "node");
 					  //.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
+		console.log(node[0]);
+		var a = d3.rgb(0,90,175);
+		var b = d3.rgb(196,225,239);
+		var color = d3.interpolate(b,a);
+		
+		var colorLinear = d3.scale.linear()
+								.domain([d3.min(node[0],function(d){return d.__data__.r;}),
+											d3.max(node[0],function(d){return d.__data__.r;})
+										])
+								.range([0,1]);
+					  
 		node.append("title")
 			.text(function(d) { return "成绩" + ": " + d.score; });
 
@@ -94,7 +114,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			.ease('bounce')
 			.attr("r", function(d) { return d.r; })
 			.style("fill", function(d) { 
-				return color(d.r%20); 
+				return color(colorLinear(d.r)); 
 			})
 			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 			

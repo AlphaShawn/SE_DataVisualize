@@ -4,6 +4,7 @@
 	<title></title>
 	<script src="/alpha/js/jquery-1.11.3.js"></script>
 	<script src="/alpha/js/jquery.enlarge.min.js"></script>
+	<link rel="stylesheet" href="/alpha/css/bootstrap.min.css" type="text/css"/>
 	
 	<style type="text/css">
 	
@@ -11,6 +12,7 @@
 		{
 			width:960px;
 			margin:0 auto;
+			margin-top:50px;
 			height:1000px;
 		}
 		

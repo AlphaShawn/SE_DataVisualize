@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset = "utf-8"/>
 	<script src = "/alpha/js/jquery-1.11.3.js" charset = 'utf-8'></script>
 	<script src = "/alpha/js/d3.min.js"></script> 
+	<link rel="stylesheet" href="/alpha/css/bootstrap.css" type="text/css"/>
 	<style>
 		body { 
 			font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -57,36 +58,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <body>
 	<div id = "data-content">
-		<div id="frame">
-			<iframe marginheight="0" marginwidth="0" scrolling="no" style="height:100%; width:100%">
-			
-			
-			</iframe>
+	
+		<div id="frame" class="embed-responsive embed-responsive-16by9">
+			<iframe class="embed-responsive-item" src=""></iframe>
 		</div>
 		
-		<select id = "select-data">
-			<option value="14-1-14-se.csv" selected="selected">14-15学年14级软件</option>
-			<option value="14-1-14-seiee.csv">14-15学年14级电子信息类</option>
-			<option value="14-1-14-ic.csv">14-15学年14级微电子</option>
-			<option value="14-1-14-is.csv">14-15学年14级信安</option>
-			<option value="14-1-14-seiees.csv">14-15学年14级电子信息科学类</option>
-			<option value="14-1-14-eec.csv">14-15学年14级工科实验班</option>
-			<option value="14-1-13-se.csv">14-15学年13级软件</option>
-			<option value="14-1-13-cs.csv">14-15学年13级计算机科学</option>
-			<option value="14-1-13-auto.csv">14-15学年13级自动化</option>
-			<option value="14-1-13-eea.csv">14-15学年13级电气工程及自动化</option>
-			<option value="14-1-13-est.csv">14-15学年13级电子科学与技术</option>
-			<option value="14-1-13-is.csv">14-15学年13级信安</option>
-			<option value="14-1-13-it.csv">14-15学年13级信息工程</option>
-			<option value="14-1-13-mcti.csv">14-15学年13级测控</option>
-			<option value="14-1-13-ic.csv">14-15学年13级微电子</option>
-			<option value="14-1-13-seiees.csv">14-15学年13级电子信息科学类</option>
-		</select>
-		<form style="display:inline">
-			<input name="vis" type="radio" value="scatter">散点图
-			<input name="vis" type="radio" value="lineChart" checked="checked">折线图
-		</form>
-		<input id = "search" type = "button" value="show"/>
+		<div class="row">
+			<div class="col-xs-4">
+				<select id = "select-data" class="form-control">
+					<option value="14-1-14-se.csv" selected="selected">14-15学年14级软件</option>
+					<option value="14-1-14-seiee.csv">14-15学年14级电子信息类</option>
+					<option value="14-1-14-ic.csv">14-15学年14级微电子</option>
+					<option value="14-1-14-is.csv">14-15学年14级信安</option>
+					<option value="14-1-14-seiees.csv">14-15学年14级电子信息科学类</option>
+					<option value="14-1-14-eec.csv">14-15学年14级工科实验班</option>
+					<option value="14-1-13-se.csv">14-15学年13级软件</option>
+					<option value="14-1-13-cs.csv">14-15学年13级计算机科学</option>
+					<option value="14-1-13-auto.csv">14-15学年13级自动化</option>
+					<option value="14-1-13-eea.csv">14-15学年13级电气工程及自动化</option>
+					<option value="14-1-13-est.csv">14-15学年13级电子科学与技术</option>
+					<option value="14-1-13-is.csv">14-15学年13级信安</option>
+					<option value="14-1-13-it.csv">14-15学年13级信息工程</option>
+					<option value="14-1-13-mcti.csv">14-15学年13级测控</option>
+					<option value="14-1-13-ic.csv">14-15学年13级微电子</option>
+					<option value="14-1-13-seiees.csv">14-15学年13级电子信息科学类</option>
+				</select>
+			</div>
+			<div class="col-xs-3">
+				<label class="radio-inline">
+					<input name="vis" type="radio" value="scatter">散点图
+				</label>
+				<label class="radio-inline">
+					<input name="vis" type="radio" value="lineChart" checked="checked">折线图
+				</label>
+			</div>
+			<div class="col-xs-2">
+				<input id = "search" class="btn btn-default" type = "button" value="show"/>
+			</div>
+		</div>
 	</div>
 	<script>
 	

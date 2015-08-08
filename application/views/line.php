@@ -75,8 +75,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		var url = "<?php echo $url?>";
 	
 		var margin = {top: 20, right: 30, bottom: 30, left: 30},
-			width = window.innerWidth- margin.left - margin.right,
-			height = 530 - margin.top - margin.bottom;
+			width = window.innerWidth- margin.left - margin.right-20,
+			height = 530 - margin.top - margin.bottom -20;
 		
 		var svg = d3.select("body").append("svg")
 					.attr("width", width + margin.left + margin.right)

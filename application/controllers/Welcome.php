@@ -11,8 +11,6 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		//$this->load->view('welcome_message');
-		//$this->load->view('bubble_index');
 		$this->load->view('index');
 	}
 	
@@ -82,22 +80,17 @@ class Welcome extends CI_Controller {
 	
 	public function check_id($ID) 
 	{
-		if(!is_numeric($ID))
-		{
-			echo "false";
-			return false;
-		}
-		
-		if($this->Welcome_model->check_id(2014, 1, $ID))
-		{
-			echo "true";
-			return true;
-		}
+		$ans;
+		header('Content-type:text/json');
+		if(!isset($ID) || $ID == "")
+			$ans = false;
+		else if(!is_numeric($ID))
+			$ans = false;
+		else if($this->Welcome_model->check_id(2014, 1, $ID))
+			$ans = true;
 		else
-		{
-			echo "false2";
-			return false;
-		}
+			$ans = false;
+		echo json_encode($ans);
 	}
 	
 	public function get_basic_info($id)
