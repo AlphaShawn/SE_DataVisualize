@@ -10,13 +10,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src = "/alpha/js/jquery-1.11.3.js" charset = 'utf-8'></script>
 	<style>
 	html {
-	  font-family: sans-serif;
-	  -webkit-text-size-adjust: 100%;
-		  -ms-text-size-adjust: 100%;
+		font-family: "Microsoft YaHei",segoe ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		font-size: 100%;
+		background: #fff;
+		color: #333;
 	}
 	
 	text {
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 		font-size: 14px;
 		font-weight: 500;
 		line-height: 1.1;
@@ -52,6 +54,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 		var width = 40*root.children.length>780?780:40*root.children.length,
 			height = 500;
+		if(width<130)
+			width = 130;
 			//height = 15*root.children.length>560?560:20*root.children.length,
 			//format = d3.format(",d");
 			//color = d3.scale.category20c();

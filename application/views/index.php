@@ -18,16 +18,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			padding-top: 50px;
 		}
 		
-		
-		#heading ul 
-		{
-			list-style:none;
-		}
-		#heading li
-		{
-			padding-top:10px;
-		}
-
 		.starter-template {
 			margin-top:50px;
 			padding-left:15px;
@@ -40,15 +30,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			text-align: center;
 			padding-bottom:20px;
-		}
-		
-		.footer {
-			position: absolute;
-			bottom: 0;
-			width: 100%;
-			/* Set the fixed height of the footer here */
-			height: 60px;
-			background-color: #f5f5f5;
 		}
 		
 		.btn-ultra
@@ -72,6 +53,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			-webkit-backface-visibility: hidden;
 			-webkit-transform: translateZ(0) scale(1,1)
 		}
+		
+		.list-unstyled li
+		{
+			font-size:18px;
+			margin-left:90px;
+			list-style-type:circle;
+		}
+		
 	</style>
 	
 </head>
@@ -90,9 +79,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-				<li class="active"><a href="#">概述</a></li>
+				<li class="active"><a href="#intro">概述</a></li>
 				<li><a href="#entrance">可视化入口</a></li>
-				<li><a href="#analyse">分析总结</a></li>
+				<li><a href="#analyse">总结</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -107,10 +96,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 		</div>
     </div><!-- /.container -->
-	<hr/>
+
+	<div class="jumbotron" id="intro">
+		<div class="container">
+			<h2>概述</h2>
+			<p>
+				&nbsp &nbsp &nbsp &nbsp综合测评是电院衡量同学们学习、社交等多个方面能力的方法。多年综测的推行，也促进着同学们不拘泥于课业，从多个维度发展自身能力。<br/>
+				&nbsp &nbsp &nbsp &nbsp综合测评总分分别由70%的学积分成绩和30%的素拓成绩组成，作业通过对历年不同专业同学测评数据的可视化，探究电院同学学积分成绩和素拓成绩是否存在隐性关系。并结合对电院综测网站提供的素拓数据可视化分析，分析素拓具体的结构，给出取得高分素拓成绩的建议，并尝试给当前素拓成绩计算方式做若干评价。<br/>
+				&nbsp &nbsp &nbsp &nbsp作业由WEB网站和ppt展示两部分组成。WEB部分采用PHP作为后端，使用JQuery、D3等JS库及Bootstrap实现前端逻辑。
+			</p>
+		</div>
+    </div>
 	
 	<div class="container marketing" id="entrance">
-
+		<h2>可视化入口</h2>
 		<div class="row">
 			<div class="col-lg-4">
 				<img class="img-circle" src="/alpha/image/score-quality.jpg" alt="Score-Quality" width="140" height="140">
@@ -121,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					使用折线图、散点图可视化数据
 				</p>
 				
-				<p><a class="btn btn-default" href="/alpha/index.php/welcome/show/line_index" role="button">
+				<p><a class="btn btn-default" href="/alpha/index.php/welcome/show/line_index" target="_blank" role="button">
 					View details &raquo;
 				</a></p>
 			</div><!-- /.col-lg-4 -->
@@ -133,7 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					利用Excel清洗并可视化数据<br/>
 					结合JS等WEB开发工具整合并展现可视化结果
 				</p>
-				<p><a class="btn btn-default" href="/alpha/index.php/welcome/show/quality_num" role="button">View details &raquo;</a></p>
+				<p><a class="btn btn-default" href="/alpha/index.php/welcome/show/quality_num" target="_blank" role="button">View details &raquo;</a></p>
 			</div><!-- /.col-lg-4 -->
 			<div class="col-lg-4">
 				<img class="img-circle" src="/alpha/image/bubble.jpg" alt="Generic placeholder image" width="140" height="140">
@@ -143,12 +142,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					使用PHP库实现动态抓取数据<br/>
 					使用D3可视化数据
 				</p>
-				<p><a class="btn btn-default" href="/alpha/index.php/welcome/show/bubble_index" role="button">View details &raquo;</a></p>
+				<p><a class="btn btn-default" href="/alpha/index.php/welcome/show/bubble_index" target="_blank" role="button">View details &raquo;</a></p>
 			</div><!-- /.col-lg-4 -->
 		</div><!-- /.row -->
+		<br/><br/>
+	</div><!-- /.container -->	
 	
-	</div><!-- /.container -->
-	<hr/>
+	<div class="jumbotron" id="analyse">
+		<div class="container">
+			<h2>总结</h2>
+			<p>
+				&nbsp &nbsp &nbsp &nbsp作业主要从<strong>学积分与素拓分数的关系</strong>与<strong>素拓具体结构</strong>2个角度进行数据分析。并结合PHP、D3、JQ、Excel等工具从3个角度进行数据可视化。<br/>
+				&nbsp &nbsp &nbsp &nbsp作业主要得到以下若干结论：
+			</p>
+					<ul class="list-unstyled">
+						<li>素拓成绩与学积分呈一定负相关。基本上一个方面表现的好，另一个方面往往比较平庸甚至很差。</li>
+						<li>20-28分素拓成绩的提高，主要依靠参与素拓项目数的提高；28-29分素拓成绩的提高，主要依靠满分素拓项目数的提高；29-30+分素拓成绩的提高，主要依靠硬加分。</li>
+						<li>不同年级xxxx</li>
+					</ul>
+			<p>
+				&nbsp &nbsp &nbsp &nbsp学积分和素拓成绩的负相关，反映出了同学们发展的单一性，也说明了多角度评测机制的重要性。 <br/>
+				&nbsp &nbsp &nbsp &nbsp素拓成绩计算方式方面，积极参与各类活动的同学确实都能够取得较好成绩，但评价机制还过于简单化，同学只用选择性参加若干高分素拓活动，并达到一定活动数量，便可取得较好的成绩。也就是说，当前的素拓计算方式无法区分中上、中等同学的真实素质拓展能力。<br/>
+				&nbsp &nbsp &nbsp &nbsp硬加分可以说是学业、社交等各方面高水准素质的体现，建议能从素拓总分中独立出来，使得素拓统计更为清晰。将其作为综合测评加分项，参与综合测评的计算。并设置合理上限，保证公平性。
+			</p>
+		</div>
+    </div>
 	
 </body>
 </html>

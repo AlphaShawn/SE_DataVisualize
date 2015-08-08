@@ -37,6 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h1>Bubble Visualization</h1>
 			<h3>Enter student ID number</h3>
 			<p>Then Click button To see the result</p>
+			<small>参考：软工学号起止5140379001-5140379072</small>
 		</div>
 	</div>
 	

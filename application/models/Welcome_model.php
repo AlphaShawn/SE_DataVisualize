@@ -52,6 +52,8 @@ class Welcome_model extends CI_Model {
 			$subject = curl_exec($ch);
 			curl_close($ch);
 			
+			//var_dump($id);
+		
 			$pattern;
 			if($isAll == true)
 				$pattern = '/<td (class="opt-score")*>(.*)<\/td>\s*<td>(.*)<\/td>\s*<td>(.*)<\/td>\s*<td>(.*)<\/td>/';
@@ -59,6 +61,7 @@ class Welcome_model extends CI_Model {
 				$pattern = '/<td class="opt-score">(.*)<\/td>\s*<td>(.*)<\/td>\s*<td>(.*)<\/td>\s*<td>(.*)<\/td>/';
 			
 			$match = array();
+			
 			preg_match_all($pattern, $subject, $match);
 						
 			if($isAll == true)
@@ -79,7 +82,6 @@ class Welcome_model extends CI_Model {
 			$data['total_score'] = $match[1][0];
 			$data['rank'] = $match[1][1];
 			
-			//var_dump($match);
 			return $data;
 		}
 		

@@ -17,30 +17,60 @@ class Welcome extends CI_Controller {
 	public function test()
 	{
 		$cookie = $this->Welcome_model->get_cookie(2014,1);
-		$data = $this->Welcome_model->get_score($cookie, 5140379066,1);
-		//var_dump($data);
+		$data = $this->Welcome_model->get_score($cookie, 5142119001,1);
+		var_dump($data);
 	}
 	
 	public function get_origin_quality() 
 	{
-		$filename = "14-1-14-eec";
+		$filename = "info";
 		//$a = file($filename.'.txt');
 		$a = file("xuehao.txt");
+		//var_dump($a);
 		
-		
-		$str = "quality,num_of_activity\n";
-		foreach($a as $line=>$content)
+		$str = "quality,num_of_activity,plus,plus_num\n";
+		for($k=0;$k<count($a);$k++)
 		{
-			$content = trim($content);
-			$cookie = $this->Welcome_model->get_cookie(2014,1);
-			$data = $this->Welcome_model->get_score($cookie, $content, 1);
+			//var_dump($a);
+			$content = $a[$k];
+			$content = trim($content,"\n");
 			
-			$res = 0;
-			$count = 0;
-			$num = 0;
-			$str = $str.$data['total_score'].','.count($data['unit'])."\n";
+			$content = floatval($content);
+			//var_dump($content);
+			$str = $str.$content.",";
 			
+			if($this->Welcome_model->check_id(2014, 1, $content) == false)
+			{
+				$str = $str."0".','."0".','."0".','."0"."\n";
+			}
+			
+			else
+			{
+				$cookie = $this->Welcome_model->get_cookie(2014,1);
+				$data = $this->Welcome_model->get_score($cookie, $content, 1);
+				
+			//	var_dump($data);
+				$res = 0;
+				$count = 0;
+				$plus = 0;
+				$high = 0;
+				for($i=0;$i<count($data['unit']);$i++)
+				{
+					if($data['unit'][$i]==0)
+					{
+						$plus += $data['score'][$i];
+						$count++;
+					}
+					if($data['score'][$i]==100)
+						$res++;
+					if($data['score'][$i]>94)
+						$high++;
+				}
+				
+				$str = $str.$data['total_score'].','.count($data['unit']).','.$plus.','.$count.",".$res.",".$high."\n";
+			}
 		}
+		//var_dump($str);
 		header("Content-type:text/csv"); 
 		header("Content-Disposition:attachment;filename=".$filename.".csv");
 		echo $str;

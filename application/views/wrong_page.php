@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		.container
 		{
+			padding-top:100px;
 			text-align:center;
 		}
 	
