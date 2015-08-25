@@ -91,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		d3.csv('/alpha/data/'+url, function(error, data){
 			
-			//console.log(data);
+			//console.log(url);
 			
 			//转化字符串为数字
 			dat = data;
@@ -330,7 +330,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					.attr('transform', "translate("+mouseX+","+0+")")
 					.select('text')
 					.text(num)
-					.attr('transform', "translate(-15,"+mouseY+")");
+					.attr('transform', "translate(-15,"+ (mouseY-15)+")");
 				
 				var scoreLower=0, qualityLower=0;
 				for(var i=0;i<num;i++)

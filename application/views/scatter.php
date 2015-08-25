@@ -115,6 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			scoreAverage = d3.mean(data,function(d){return d.score;}).toFixed(2);
 			qualityAverage = d3.mean(data,function(d){return d.quality}).toFixed(2);
 			
+			var count = 0;
 			svg.selectAll(".dot")
 				.data(data)
 				.enter().append("circle")
@@ -124,7 +125,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				.attr("cy", function(d) { return y(d.quality); })
 				.style("fill", function(d) {
 					if(d.score>scoreAverage && d.quality<qualityAverage)
+					{
+						count++;
 						return "red";
+					}
 					else
 						return "#000";
 			
@@ -164,6 +168,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							.attr('x2',width)
 							.attr('y2',0);
 			
+			d3.select('body').append('div')
+							.append('p')
+							.attr('style','text-align:right;font-size:8px;')
+							.text("学积分高于平均分、素拓低于平均分同学比例：" + Math.floor(count/data.length*1000)/10+"%");
+			console.log(count/data.length);
 		})
 	</script>
 

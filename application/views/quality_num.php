@@ -80,7 +80,7 @@ $(function(){
 <body>
 	<div id="image-content">
 		
-		<h3 class="text-center">各学院素拓成绩与参与素拓项目数的关系</h3>
+		<h3 class="text-center">各专业素拓成绩与参与素拓项目数的关系</h3>
 		
 		<div class="pair-image">
 			<div class="image-group">

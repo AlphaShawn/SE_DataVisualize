@@ -73,6 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<option value="14-1-14-is.csv">14-15学年14级信安</option>
 					<option value="14-1-14-seiees.csv">14-15学年14级电子信息科学类</option>
 					<option value="14-1-14-eec.csv">14-15学年14级工科实验班</option>
+					
 					<option value="14-1-13-se.csv">14-15学年13级软件</option>
 					<option value="14-1-13-cs.csv">14-15学年13级计算机科学</option>
 					<option value="14-1-13-auto.csv">14-15学年13级自动化</option>
@@ -83,6 +84,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<option value="14-1-13-mcti.csv">14-15学年13级测控</option>
 					<option value="14-1-13-ic.csv">14-15学年13级微电子</option>
 					<option value="14-1-13-seiees.csv">14-15学年13级电子信息科学类</option>
+					
+					<option value="14-1-12-se.csv">14-15学年12级软件</option>
+					<option value="14-1-12-cs.csv">14-15学年12级计算机科学</option>
+					<option value="14-1-12-auto.csv">14-15学年12级自动化</option>
+					<option value="14-1-12-eea.csv">14-15学年12级电气工程及自动化</option>
+					<option value="14-1-12-est.csv">14-15学年12级电子科学与技术</option>
+					<option value="14-1-12-is.csv">14-15学年12级信安</option>
+					<option value="14-1-12-it.csv">14-15学年12级信息工程</option>
+					<option value="14-1-12-mcti.csv">14-15学年12级测控</option>
+					<option value="14-1-12-ic.csv">14-15学年12级微电子</option>
+					<option value="14-1-12-seiees.csv">14-15学年12级电子信息科学类</option>
 				</select>
 			</div>
 			<div class="col-xs-3" style="padding-top:5px">
@@ -127,7 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<h2>Conclusion</h2>
 			<p>&nbsp &nbsp &nbsp &nbsp较多同学在学积分和素拓上存在“偏科”<br/>
 			&nbsp &nbsp &nbsp &nbsp学积分的高低往往决定综测排名的高低<br/>
-			&nbsp &nbsp &nbsp &nbsp年级的升高，使得课业优秀的同学更有意识的去参与素质拓展活动<br/>
+			&nbsp &nbsp &nbsp &nbsp年级的升高，课业优秀的同学更有意识的去参与素质拓展活动<br/>
 			</p>
 		</div>
 	</div>
