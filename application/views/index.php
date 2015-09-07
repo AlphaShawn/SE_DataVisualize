@@ -97,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
     </div><!-- /.container -->
 
-	<div class="jumbotron" id="intro">
+	<div class="jumbotron" id="intro" style="margin-bottom:0px">
 		<div class="container">
 			<h2>概述</h2>
 			<p>
@@ -109,7 +109,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
     </div>
 	
-	<div class="container marketing" id="entrance">
+
+	<div class="container" style="padding-bottom:50px;padding-top:30px" id="entrance">
 		<h2>可视化入口</h2>
 		<div class="row">
 			<div class="col-lg-4">
@@ -146,11 +147,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p><a class="btn btn-default" href="/alpha/index.php/welcome/show/bubble_index" target="_blank" role="button">View details &raquo;</a></p>
 			</div><!-- /.col-lg-4 -->
 		</div><!-- /.row -->
-		<br/><br/>
 	</div><!-- /.container -->	
+
 	
-	<div class="jumbotron" id="analyse">
-		<div class="container">
+	<div class="jumbotron" id="analyse" style="margin-bottom:0">
+		<div class="container" >
 			<h2>总结</h2>
 			<p>
 				&nbsp &nbsp &nbsp &nbsp作业主要从<strong>学积分与素拓分数的关系、素拓具体结构</strong>两个角度进行数据分析，并结合PHP、D3、JQ、Excel等工具从三个角度进行数据可视化。<br/>
@@ -167,7 +168,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				&nbsp &nbsp &nbsp &nbsp硬加分是学业、社交等各方面高水准素质的体现。建议将其从素拓总分中独立出来，使素拓统计更清晰，同时作为综合测评加分项，参与综合测评的计算。同时设置合理上限，保证公平性。
 			</p>
 		</div>
-    </div>
+	</div>
+	<footer class="footer">
+      <div class="container">
+        <p class="text-muted" style="text-align:center">Email : xyw1105@126.com</p>
+      </div>
+    </footer>
+	
 	
 </body>
 </html>
