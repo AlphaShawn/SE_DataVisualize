@@ -87,14 +87,14 @@ class Welcome extends CI_Controller {
 	}
 	
 	
-	public function show_bubble($ID,$isAll,$year,$semester)
+	public function show_bubble($ID,$isAll,$change_to)
 	{
-		if(!isset($ID) || !isset($isAll) || !isset($year) || !isset($semester))
+		if(!isset($ID) || !isset($isAll) || !isset($change_to))
 			return;
 		$data['ID'] = $ID;
 		$data['isAll'] = $isAll;
-		$data['semester'] = $semester;
-		$data['year'] = $year;
+		$data['change_to'] = $change_to;
+		//var_dump("hello");
 		$this->show("bubble", $data);
 	}
 	
@@ -110,7 +110,7 @@ class Welcome extends CI_Controller {
 		$this->show("scatter", $data);
 	}
 	
-	public function check_id($ID,$year,$semester) 
+	public function check_id($ID, $change_to) 
 	{
 		$ans;
 		header('Content-type:text/json');
@@ -118,8 +118,11 @@ class Welcome extends CI_Controller {
 			$ans = false;
 		else if(!is_numeric($ID))
 			$ans = false;
-		else if($this->Welcome_model->check_id($year, $semester, $ID))
+		else if($this->Welcome_model->check_id($change_to, $ID))
+		{
+		//	var_dump("123");
 			$ans = true;
+		}
 		else
 			$ans = false;
 		echo json_encode($ans);
@@ -144,13 +147,14 @@ class Welcome extends CI_Controller {
 		header('Content-type:text/json');
 		echo json_encode($data);
 	}
-	
-	public function getScore($id, $all, $year, $semester)
+
+
+	public function getScore($id, $all, $change_to)
 	{
 		if(!isset($id))
 			return;
 		
-		$cookie = $this->Welcome_model->get_cookie($year,$semester);
+		$cookie = $this->Welcome_model->get_cookie($change_to);
 		
 		$data = $this->Welcome_model->get_score($cookie, $id, $all);
 		
@@ -187,6 +191,7 @@ class Welcome extends CI_Controller {
 					"rank" =>$data['rank']
 				);
 		
+		//var_dump($data);
 		header('Content-type:text/json');
 		echo json_encode($dat);
 	}

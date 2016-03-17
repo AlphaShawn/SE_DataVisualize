@@ -64,16 +64,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="col-xs-2"></div>
 			<div class="col-xs-2">
 				<select id = "year" class="form-control" value="学年">
-					<option value="2014">14-15学年</option>
-					<option value="2013">13-14学年</option>
-					<option value="2012">12-13学年</option>
+					<option value="7">15-16学年</option>			
+					<option value="5">14-15学年</option>
+					<option value="3">13-14学年</option>
+					<option value="1">12-13学年</option>
 				</select>
 			</div>
 			
 			<div class="col-xs-2">
 				<select id = "semester" class="form-control" value="学年">
-					<option value="1">第一学期</option>
-					<option value="2">第二学期</option>
+					<option value="0">第一学期</option>
+					<option value="1">第二学期</option>
 				</select>
 			</div>
 			
@@ -166,21 +167,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 		//	console.log(year);
 		//	console.log(semester);
-			
+			var change_to = parseInt(year) + parseInt(semester);
 			ID = $.trim(ID);
-			console.log(ID);
+			console.log(change_to);
 			if(ID=="")
 			{
 				$('iframe').attr('src', '/alpha/index.php/welcome/show/wrong_page');
 				return;
 			}
-			$.ajax({url:'/alpha/index.php/welcome/check_id/'+ID+"/"+year+"/"+semester, 
+			$.ajax({url:'/alpha/index.php/welcome/check_id/'+ID+"/"+change_to, 
 					success:function(d){
 						
 						if(d==false)
 							$('iframe').attr('src', '/alpha/index.php/welcome/show/wrong_page');
 						else
-							$('iframe').attr('src', '/alpha/index.php/welcome/show_bubble/'+ID+"/1/"+year+"/"+semester);
+							$('iframe').attr('src', '/alpha/index.php/welcome/show_bubble/'+ID+"/1/"+change_to);
 					}
 			})
 		});

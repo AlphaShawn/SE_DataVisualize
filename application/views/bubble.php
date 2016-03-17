@@ -39,12 +39,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 	var ID = "<?php echo $ID ?>";
 	var isAll = "<?php echo $isAll ?>";
-	var year = "<?php echo $year ?>";
-	var semester = "<?php echo $semester ?>";
+	var change_to = "<?php echo $change_to ?>";
 
 	//console.log(base_url+"/welcome/getScore/"+ID + "/" + isAll);
-	d3.json(base_url+"/welcome/getScore/"+ ID + "/" + isAll + "/" + year +"/" + semester, function(error, root) {
-	
+	d3.json(base_url+"/welcome/getScore/"+ ID + "/" + isAll + "/" + change_to, function(error, root) {
+		
+		console.log("hello");
 		if(root == undefined)
 		{
 			d3.select('body').append('h1')
